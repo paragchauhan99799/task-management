@@ -7,7 +7,12 @@ module.exports = {
     path: __dirname+ "/dist",
     filename: 'bundle.js',
   },
-
+  watch: true,
+  watchOptions: {
+    poll: true,
+    aggregateTimeout: 300,
+    number: 1000
+  },
   module:{
     loaders: [
       {

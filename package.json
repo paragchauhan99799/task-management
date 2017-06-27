@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node_modules/.bin/webpack && nodemon --watch app --watch ./server/index.js",
+    "dev": "webpack --watch",
     "build": "nodemon --watch app --watch ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@blueprintjs/core": "^1.20.0",
     "axios": "^0.16.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
@@ -30,6 +32,7 @@
     "css-loader": "^0.28.4",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2"
+    "style-loader": "^0.18.2",
+    "webpack-dev-server": "^2.5.0"
   }
 }
