@@ -1,5 +1,6 @@
 .inputStyle{
     height: 30px;
+    width: 100%;
     font-size: 16px;
 }
 .createTask{
@@ -21,6 +22,9 @@
 .flex{
     display: flex;
 }
+.flexcol{
+    flex-direction: column;
+}
 .flex1{
     flex: 1;
 }
@@ -32,4 +36,14 @@
 }
 .padding10{
     padding: 10px;
+}
+a{
+    text-decoration: blink;
+    padding: 15px;
+    font-size: 15px;
+    color: rgba(0,0,0,.44)!important;
+}
+
+pt-dialog pt-overlay-content{
+    min-width:400px;    
 }

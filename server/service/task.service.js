@@ -11,5 +11,6 @@ exports.updateTask = async (taskId, data) => {
 
 exports.deleteTask = async (taskId) => {
     const deletedTaskObject = await Task.findOneAndRemove({ _id: taskId });
+    console.log('Delete Object', deletedTaskObject);
     return deletedTaskObject;
 }
