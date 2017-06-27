@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node_modules/.bin/webpack && nodemon --watch app --watch ./server/index.js",
+    "start": "nodemon --watch app --watch ./server/index.js",
     "dev": "webpack --watch",
     "build": "nodemon --watch app --watch ./server/index.js",
+    "production":"node_modules/.bin/webpack && nodemon --watch app --watch ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
