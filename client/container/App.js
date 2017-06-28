@@ -150,37 +150,3 @@ class App extends Component {
   }
 }
 export default App;
-
-/*
-<div className="row col-md-12 col-xs-12">
-          <div className="col-md-2 col-xs-hidden"></div>
-          <div className="createTask col-md-8 col-xs-12">
-            <small><center>Task Details</center></small>
-            <div className="flex padding10">
-              <small className="flex1">Name: </small>
-              <div className="flex2">
-                <input className="inputStyle flex1" value={ this.state.task.taskName } onChange={ (e) => { this.onChange('taskName',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex padding10">
-              <small className="flex1">Created: </small>
-              <div className="flex2">
-                <input className="inputStyle" value={ this.state.task.createdBy } onChange={ (e) => { this.onChange('createdBy',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex padding10">
-              <small className="flex1">Description: </small>
-              <div className="flex2">
-                <input className="inputStyle" value={ this.state.task.description } onChange={ (e) => { this.onChange('description',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex paddingTop10" style={{"justifyContent":"center"}}>
-              <button onClick={() => {this.onSubmit()}}  type="button" className="pt-button pt-minimal pt-icon-add pt-intent-success">
-                Add
-              </button>
-            </div>
-          </div>
-          <div className="col-md-2 col-xs-hidden"></div>
-        </div>
-  
-*/
