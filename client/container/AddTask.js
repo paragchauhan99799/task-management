@@ -35,13 +35,26 @@ class AddTask extends Component {
               </div>
             </div>
             <div className="flex padding10">
-              <small className="flex1">Date: </small>
+              <small className="flex1">Start Date: </small>
               <div className="flex2">
                 <DatePicker
                   className="inputStyle"
+                  placeholderText="DD-MM-YYYY"
+                  selected={task.creationTimestamp || moment()}
+                  dateFormat="DD/MM/YYYY"
+                  onChange={(d) => { onChange("creationTimestamp", d) }}
+                />
+              </div>
+            </div>
+            <div className="flex padding10">
+              <small className="flex1">End Date: </small>
+              <div className="flex2">
+                <DatePicker
+                  className="inputStyle"
+                  placeholderText="DD-MM-YYYY"
                   selected={task.endDate || moment()}
                   dateFormat="DD/MM/YYYY"
-                  onChange={(d) => { onChange('endDate',d) }}
+                  onChange={(d) => { onChange("endDate", d) }}
                 />
               </div>
             </div>

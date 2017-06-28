@@ -14,3 +14,23 @@ exports.deleteTask = async (taskId) => {
     console.log('Delete Object', deletedTaskObject);
     return deletedTaskObject;
 }
+
+exports.filterWithEndDate = async (date) => {
+    const filterObject = await Task.find({
+        $gte: {
+          creationTimestamp: date,
+        } 
+    });
+    console.log('filterWithEndDate', filterObject);
+    return filterObject;
+}
+
+exports.filterWithCreatednDate = async (date) => {
+    const filterObject = await Task.find({
+        $gte: {
+          creationTimestamp: date,
+        } 
+    });
+    console.log('filterWithCreatednDate', filterObject);
+    return filterObject;
+}

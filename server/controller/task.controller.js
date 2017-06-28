@@ -6,6 +6,8 @@ exports.createTask = async (req,res) => {
             taskName: req.body.taskName,
             createdBy: req.body.createdBy,
             description: req.body.description,
+            creationTimestamp: req.body.creationTimestamp,
+            endDate: req.body.endDate,
         }
         const taskCreated = await taskService.createTask(data);
         res.status(200).send(taskCreated);
@@ -38,6 +40,26 @@ exports.deleteTask = async (req,res) => {
         const taskId = req.params.taskId;
         const deletedTaskObject = await taskService.deleteTask(taskId);
         res.status(200).send(deletedTaskObject);
+    } catch(err){
+        res.status(400).send(err);
+    }
+}
+
+exports.filterWithEndDate = async (req,res) => {
+    try{
+        const date = req.params.date;
+        const filterObject = await taskService.filterWithEndDate(date);
+        res.status(200).send(filterObject);
+    } catch(err){
+        res.status(400).send(err);
+    }
+}
+
+exports.filterWithCreatednDate = async (req,res) => {
+    try{
+        const date = req.params.date;
+        const filterObject = await taskService.filterWithCreatednDate(date);
+        res.status(200).send(filterObject);
     } catch(err){
         res.status(400).send(err);
     }

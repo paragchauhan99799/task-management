@@ -42528,6 +42528,10 @@ var _AddTask = __webpack_require__(269);
 
 var _AddTask2 = _interopRequireDefault(_AddTask);
 
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42552,6 +42556,7 @@ var App = function (_Component) {
         taskName: '',
         createdBy: '',
         description: '',
+        creationTimestamp: '',
         endDate: ''
       },
       dialog: false
@@ -42577,8 +42582,7 @@ var App = function (_Component) {
         var stateData = _this2.state.data;
         console.log('on Submit reponse', data);
         stateData = _lodash2.default.concat(stateData, data);
-        _this2.setState({ data: stateData });
-        _this2.setState({ dialog: false });
+        _this2.setState({ data: stateData, dialog: false, task: '' });
       });
       console.log('State onSubmit: ', this.state.task);
     }
@@ -42670,7 +42674,7 @@ var App = function (_Component) {
               this.state.data.map(function (data, index) {
                 return _react2.default.createElement(
                   'div',
-                  { className: 'taskObject col-md-4 col-xs-12', key: index },
+                  { className: 'taskObject col-md-6 col-xs-12', key: index },
                   _react2.default.createElement(
                     'div',
                     { className: 'row pt-card pt-elevation-3 flex flexcol', style: { "border": "1px solid black", "margin": "0px", "padding": "10px" } },
@@ -42679,7 +42683,7 @@ var App = function (_Component) {
                       { className: 'flex' },
                       _react2.default.createElement(
                         'small',
-                        null,
+                        { className: 'paddingRight5' },
                         _react2.default.createElement(
                           'b',
                           null,
@@ -42697,7 +42701,7 @@ var App = function (_Component) {
                       { className: 'flex paddingTop10' },
                       _react2.default.createElement(
                         'small',
-                        null,
+                        { className: 'paddingRight5' },
                         _react2.default.createElement(
                           'b',
                           null,
@@ -42715,7 +42719,7 @@ var App = function (_Component) {
                       { className: 'flex paddingTop10 flexcol' },
                       _react2.default.createElement(
                         'small',
-                        null,
+                        { className: 'paddingRight5' },
                         _react2.default.createElement(
                           'b',
                           null,
@@ -42730,38 +42734,42 @@ var App = function (_Component) {
                     ),
                     _react2.default.createElement(
                       'div',
-                      { className: 'flex paddingTop10 flexcol' },
+                      { className: 'flex paddingTop10' },
                       _react2.default.createElement(
-                        'small',
-                        null,
+                        'div',
+                        { className: 'flex1 flex flexcol' },
                         _react2.default.createElement(
-                          'b',
+                          'small',
                           null,
-                          'Start Date: '
+                          _react2.default.createElement(
+                            'b',
+                            null,
+                            'Start Date: '
+                          )
+                        ),
+                        _react2.default.createElement(
+                          'small',
+                          null,
+                          (0, _moment2.default)(data.creationTimestamp).utc().format("MMMM Do YYYY")
                         )
                       ),
                       _react2.default.createElement(
-                        'small',
-                        null,
-                        data.creationTimestamp.toString()
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'flex paddingTop10 flexcol' },
-                      _react2.default.createElement(
-                        'small',
-                        null,
+                        'div',
+                        { className: 'flex1 flex flexcol' },
                         _react2.default.createElement(
-                          'b',
+                          'small',
                           null,
-                          'End Date: '
+                          _react2.default.createElement(
+                            'b',
+                            null,
+                            'End Date: '
+                          )
+                        ),
+                        _react2.default.createElement(
+                          'small',
+                          null,
+                          (0, _moment2.default)(data.endDate).utc().format("MMMM Do YYYY")
                         )
-                      ),
-                      _react2.default.createElement(
-                        'small',
-                        null,
-                        data.endDate.toString()
                       )
                     ),
                     _react2.default.createElement(
@@ -42811,40 +42819,6 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = App;
-
-/*
-<div className="row col-md-12 col-xs-12">
-          <div className="col-md-2 col-xs-hidden"></div>
-          <div className="createTask col-md-8 col-xs-12">
-            <small><center>Task Details</center></small>
-            <div className="flex padding10">
-              <small className="flex1">Name: </small>
-              <div className="flex2">
-                <input className="inputStyle flex1" value={ this.state.task.taskName } onChange={ (e) => { this.onChange('taskName',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex padding10">
-              <small className="flex1">Created: </small>
-              <div className="flex2">
-                <input className="inputStyle" value={ this.state.task.createdBy } onChange={ (e) => { this.onChange('createdBy',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex padding10">
-              <small className="flex1">Description: </small>
-              <div className="flex2">
-                <input className="inputStyle" value={ this.state.task.description } onChange={ (e) => { this.onChange('description',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex paddingTop10" style={{"justifyContent":"center"}}>
-              <button onClick={() => {this.onSubmit()}}  type="button" className="pt-button pt-minimal pt-icon-add pt-intent-success">
-                Add
-              </button>
-            </div>
-          </div>
-          <div className="col-md-2 col-xs-hidden"></div>
-        </div>
-  
-*/
 
 /***/ }),
 /* 268 */
@@ -43006,17 +42980,40 @@ var AddTask = function (_Component) {
             _react2.default.createElement(
               'small',
               { className: 'flex1' },
-              'Date: '
+              'Start Date: '
             ),
             _react2.default.createElement(
               'div',
               { className: 'flex2' },
               _react2.default.createElement(_reactDatepicker2.default, {
                 className: 'inputStyle',
+                placeholderText: 'DD-MM-YYYY',
+                selected: task.creationTimestamp || (0, _moment2.default)(),
+                dateFormat: 'DD/MM/YYYY',
+                onChange: function onChange(d) {
+                  _onChange("creationTimestamp", d);
+                }
+              })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'flex padding10' },
+            _react2.default.createElement(
+              'small',
+              { className: 'flex1' },
+              'End Date: '
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'flex2' },
+              _react2.default.createElement(_reactDatepicker2.default, {
+                className: 'inputStyle',
+                placeholderText: 'DD-MM-YYYY',
                 selected: task.endDate || (0, _moment2.default)(),
                 dateFormat: 'DD/MM/YYYY',
                 onChange: function onChange(d) {
-                  _onChange('endDate', d);
+                  _onChange("endDate", d);
                 }
               })
             )
@@ -65958,7 +65955,7 @@ exports = module.exports = __webpack_require__(113)(undefined);
 
 
 // module
-exports.push([module.i, ".inputStyle {\n  height: 30px;\n  width: 100%;\n  font-size: 16px; }\n\n.createTask {\n  padding: 20px; }\n  .createTask small {\n    color: #0d8050;\n    padding-top: 10px;\n    text-align: right;\n    padding-right: 10px; }\n\n.taskData {\n  padding: 20px; }\n  .taskData .taskObject {\n    margin: auto;\n    margin-bottom: 30px; }\n\n.flex {\n  display: flex; }\n\n.flexcol {\n  flex-direction: column; }\n\n.flex1 {\n  flex: 1; }\n\n.flex2 {\n  flex: 2; }\n\n.paddingTop10 {\n  padding-top: 10px; }\n\n.padding10 {\n  padding: 10px; }\n\na {\n  text-decoration: blink;\n  padding: 15px;\n  font-size: 15px;\n  color: rgba(0, 0, 0, 0.44) !important; }\n\npt-dialog pt-overlay-content {\n  min-width: 400px; }\n", ""]);
+exports.push([module.i, ".inputStyle {\n  height: 30px;\n  width: 100%;\n  font-size: 16px; }\n\n.createTask {\n  padding: 20px; }\n  .createTask small {\n    color: #0d8050;\n    padding-top: 10px;\n    text-align: right;\n    padding-right: 10px; }\n\n.taskData {\n  padding: 20px; }\n  .taskData .taskObject {\n    margin: auto;\n    margin-bottom: 30px; }\n\n.flex {\n  display: flex; }\n\n.flexcol {\n  flex-direction: column; }\n\n.flex1 {\n  flex: 1; }\n\n.flex2 {\n  flex: 2; }\n\n.paddingTop10 {\n  padding-top: 10px; }\n\n.padding10 {\n  padding: 10px; }\n\n.paddingRight5 {\n  padding-right: 5px; }\n\na {\n  text-decoration: blink;\n  padding: 15px;\n  font-size: 15px;\n  color: rgba(0, 0, 0, 0.44) !important; }\n\npt-dialog pt-overlay-content {\n  min-width: 400px; }\n", ""]);
 
 // exports
 

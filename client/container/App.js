@@ -6,7 +6,7 @@ import { DateInput } from "@blueprintjs/datetime";
 const asyncActions = require("../action/asyncActions");
 import './App.scss';
 import AddTask from './AddTask';
-
+import moment from 'moment';
 
 class App extends Component {
   constructor(){
@@ -17,7 +17,8 @@ class App extends Component {
         taskName: '',
         createdBy: '',
         description: '',
-        endDate:'',
+        creationTimestamp: '',
+        endDate: '',
       },
       dialog: false,
     }
@@ -38,8 +39,7 @@ class App extends Component {
       let stateData = this.state.data;
       console.log('on Submit reponse', data);
       stateData = _.concat(stateData, data);
-      this.setState({ data: stateData });
-      this.setState({ dialog: false });
+      this.setState({ data: stateData ,dialog: false, task: '' });
     })
     console.log('State onSubmit: ', this.state.task);
   }
@@ -93,27 +93,29 @@ class App extends Component {
           {
             this.state.data.map((data, index) => {
               return(
-                <div className="taskObject col-md-4 col-xs-12" key={index}>
+                <div className="taskObject col-md-6 col-xs-12" key={index}>
                   <div className="row pt-card pt-elevation-3 flex flexcol" style={{"border":"1px solid black","margin":"0px","padding":"10px"}}>
                       <div className="flex">
-                        <small><b>Name: </b></small>
+                        <small className="paddingRight5"><b>Name: </b></small>
                         <small>{data.taskName}</small>
                       </div>
                       <div className="flex paddingTop10">
-                        <small><b>Created: </b></small>
+                        <small className="paddingRight5"><b>Created: </b></small>
                         <small>{data.createdBy}</small>
                       </div>
                       <div className="flex paddingTop10 flexcol">
-                        <small><b>Description: </b></small>
+                        <small className="paddingRight5"><b>Description: </b></small>
                         <small>{data.description}</small>
                       </div>
-                      <div className="flex paddingTop10 flexcol">
-                        <small><b>Start Date: </b></small>
-                        <small>{(data.creationTimestamp).toString()}</small>
-                      </div>
-                      <div className="flex paddingTop10 flexcol">
-                        <small><b>End Date: </b></small>
-                        <small>{(data.endDate).toString()}</small>
+                      <div className="flex paddingTop10">
+                        <div className="flex1 flex flexcol">
+                          <small><b>Start Date: </b></small>
+                          <small>{ moment(data.creationTimestamp).utc().format("MMMM Do YYYY")}</small>
+                        </div>
+                        <div className="flex1 flex flexcol">
+                          <small><b>End Date: </b></small>
+                          <small>{ moment(data.endDate).utc().format("MMMM Do YYYY") }</small>
+                        </div>
                       </div>
                       <div className="paddingTop10">
                          <button onClick={() => {this.onDelete(data._id)}}  type="button" className="pt-button pt-minimal pt-icon-delete pt-intent-danger">
@@ -150,37 +152,3 @@ class App extends Component {
   }
 }
 export default App;
-
-/*
-<div className="row col-md-12 col-xs-12">
-          <div className="col-md-2 col-xs-hidden"></div>
-          <div className="createTask col-md-8 col-xs-12">
-            <small><center>Task Details</center></small>
-            <div className="flex padding10">
-              <small className="flex1">Name: </small>
-              <div className="flex2">
-                <input className="inputStyle flex1" value={ this.state.task.taskName } onChange={ (e) => { this.onChange('taskName',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex padding10">
-              <small className="flex1">Created: </small>
-              <div className="flex2">
-                <input className="inputStyle" value={ this.state.task.createdBy } onChange={ (e) => { this.onChange('createdBy',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex padding10">
-              <small className="flex1">Description: </small>
-              <div className="flex2">
-                <input className="inputStyle" value={ this.state.task.description } onChange={ (e) => { this.onChange('description',e.target.value)} } />
-              </div>
-            </div>
-            <div className="flex paddingTop10" style={{"justifyContent":"center"}}>
-              <button onClick={() => {this.onSubmit()}}  type="button" className="pt-button pt-minimal pt-icon-add pt-intent-success">
-                Add
-              </button>
-            </div>
-          </div>
-          <div className="col-md-2 col-xs-hidden"></div>
-        </div>
-  
-*/
